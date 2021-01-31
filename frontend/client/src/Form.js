@@ -27,7 +27,7 @@ class Form extends Component {
       .then((response) => response.json())
       .then((contents) => {
         this.setState({
-          data: [...this.state.data, contents.features],
+          data: [...this.state.data, ...contents.features],
         });
       }
       )
@@ -147,9 +147,14 @@ class Form extends Component {
           </div>
         </div>
         <div>
-          {this.state.data.length !== 0
-            ? console.log('not empty')
-            : null}
+          <div>
+            {this.state.data.length !== 0
+              ? <div>{this.state.data.map((info, i) => {
+                console.log(info.properties)
+                return <div>{info.properties.title}</div>;
+              })}</div>
+              : null}
+          </div>
         </div>
       </div>
     );
