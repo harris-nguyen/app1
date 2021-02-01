@@ -20,7 +20,8 @@ class Form extends Component {
     event.preventDefault();
 
     if(this.state.starttime && this.state.endtime){
-      let url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${this.state.starttime}&endtime=${this.state.endtime}&minmagnitude=${this.state.minmagnitude || 0 }&minmagnitude=${this.state.minmagnitude || 0}`;
+      let minMag = this.state.minmagnitude || 0;
+      let url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${this.state.starttime}&endtime=${this.state.endtime}&minmagnitude=${minMag}&minmagnitude=${minMag}`;
       fetch(url, {
         starttime: Number(this.state.starttime),
         endtime: Number(this.state.endtime),
@@ -39,6 +40,7 @@ class Form extends Component {
       alert('Must enter dates')
     }
   };
+
 
   starttimeHandler = (event) => {
     this.setState({ starttime: event.target.value });
@@ -107,9 +109,12 @@ class Form extends Component {
               <br />
               <br />
               <div className="text-center mt-4">
-                <MDBBtn color="indigo" type="submit">
-                  SEARCH
-                </MDBBtn>
+                {this.state.data.length === 0
+                  ? <MDBBtn color="indigo" type="submit">
+                      SEARCH
+                    </MDBBtn>
+                  : null
+                }
               </div>
             </form>
           </div>

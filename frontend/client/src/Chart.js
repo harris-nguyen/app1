@@ -19,6 +19,7 @@ class Chart extends Component {
         <div>Avg magnitude: {(max + min) / 2}</div>
         <div>Max magnitude: {max}</div>
         <div>Min magnitude: {min}</div>
+        <br />
       </div>
     );
   }
