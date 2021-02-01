@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Results extends Component {
   render(){
-    console.log("data!", this.props.data.title);
+    // console.log("data!", this.props.data.length);
     return (
       <div className="container">
         <table className="table table-striped table-dark">

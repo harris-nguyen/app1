@@ -52,35 +52,25 @@ class Form extends Component {
   starttimeHandler = (event) => {
     this.setState({ starttime: event.target.value });
   };
-  //2014-01-01
   endtimeHandler = (event) => {
     this.setState({ endtime: event.target.value });
   };
-  // 2014-01-02
-  latitudeHandler = (event) => {
-    this.setState({ latitude: event.target.value });
-  };
-  //37
-  longitudeHandler = (event) => {
-    this.setState({ longitude: event.target.value });
-  };
-
   minmagnitudeHandler = (event) => {
     this.setState({ minmagnitude: event.target.value});
   }
-  //100
-  maxradiuskmHandler = (event) => {
-    this.setState({ maxradiuskm: event.target.value });
-  };
-  //200
 
   render() {
-    console.log("INDONESIA", this.state.data.length);
+    let numberOfEarthQauks = this.state.data.length;
+    let magCollection = []
+
+    let allData = this.state.data
+    for(let i = 0; i < allData.length; i++){
+      magCollection.push(allData[i].properties.mag);
+    }
+
     return (
       <div>
-        <div
-          className='container'
-        >
+        <div className="container">
           <div md="6">
             <form onSubmit={this.submitHandler}>
               <br />
@@ -114,7 +104,6 @@ class Form extends Component {
               Location:
               <br />
               <br />
-
               <label htmlFor="defaultFormLoginEmailEx" className="grey-text">
                 minmagnitude
               </label>
@@ -126,7 +115,6 @@ class Form extends Component {
                 value={this.state.minmagnitude}
                 onChange={this.minmagnitudeHandler}
               />
-
               <br />
               <br />
               <div className="text-center mt-4">
@@ -137,15 +125,16 @@ class Form extends Component {
             </form>
           </div>
         </div>
+        {this.state.data.length !== 0 ? (
+          <Chart len={numberOfEarthQauks} magCollection={magCollection} />
+        ) : null}
         <div>
           <div>
             {this.state.data.length !== 0 ? (
               <div>
                 {this.state.data.map((info, i) => {
-                  console.log(info.properties.title);
                   return (
                     <div key={i}>
-                      <Chart data={info.properties} />
                       <Results data={info.properties} />
                     </div>
                   );
@@ -160,6 +149,18 @@ class Form extends Component {
 }
 
 export default Form;
+
+
+  // maxradiuskmHandler = (event) => {
+  //   this.setState({ maxradiuskm: event.target.value });
+  // };
+
+  // latitudeHandler = (event) => {
+  //   this.setState({ latitude: event.target.value });
+  // };
+  // longitudeHandler = (event) => {
+  //   this.setState({ longitude: event.target.value });
+  // };
 
 // <label htmlFor="defaultFormLoginEmailEx" className="grey-text">
 //                 latitude
