@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
 app.get(`/health-check`, (req, res) => {
-  console.log("Testing Home here");
   res.send(["server is connected"]);
 });
 

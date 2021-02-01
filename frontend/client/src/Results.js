@@ -2,6 +2,10 @@ import React, { Component } from "react";
 
 class Results extends Component {
   render(){
+    const milliseconds = this.props.data.time;
+    const dateObject = new Date(milliseconds);
+    const humanDateFormat = dateObject.toLocaleString();
+
     return (
       <div className="container">
         <table className="table table-striped table-dark">
@@ -15,7 +19,7 @@ class Results extends Component {
               <td>
                 <div>
                   <span> | Magnitude: {this.props.data.mag}</span>
-                  <span> | Time: {this.props.data.time} |</span>
+                  <span> | Time: {humanDateFormat} |</span>
                 </div>
               </td>
             </tr>

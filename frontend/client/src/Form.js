@@ -28,11 +28,9 @@ class Form extends Component {
       })
         .then((response) => response.json())
         .then((contents) => {
-          this.setState(
-            {
+          this.setState({
               data: [...this.state.data, ...contents.features],
-            }
-          );
+            });
         })
         .catch(() =>
           console.log("Can’t access " + url + " response. Blocked by browser?")
@@ -42,9 +40,6 @@ class Form extends Component {
     }
   };
 
-  locationHandler = (event) => {
-    this.setState({ location: event.target.value });
-  };
   starttimeHandler = (event) => {
     this.setState({ starttime: event.target.value });
   };
