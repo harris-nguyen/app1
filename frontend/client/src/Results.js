@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 class Results extends Component {
   render(){
-    // console.log("data!", this.props.data.length);
     return (
       <div className="container">
         <table className="table table-striped table-dark">
@@ -15,8 +14,8 @@ class Results extends Component {
             <tr>
               <td>
                 <div>
-                  <div>Mag: {this.props.data.mag}</div>
-                  <div>Ids: {this.props.data.ids}</div>
+                  <span> | Magnitude: {this.props.data.mag}</span>
+                  <span> | Time: {this.props.data.time} |</span>
                 </div>
               </td>
             </tr>

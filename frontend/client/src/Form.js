@@ -9,41 +9,37 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: "",
       starttime: "",
       endtime: "",
-      latitude: "",
-      longitude: "",
       minmagnitude: "",
-      maxradiuskm: "",
-      data: [],
-      data2: [],
+      data: []
     };
   }
 
   submitHandler = (event) => {
     event.preventDefault();
-    // let url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2021-01-26&endtime=2021-01-28`;
-    let url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${this.state.starttime}&endtime=${this.state.endtime}&minmagnitude=${this.state.minmagnitude}&minmagnitude=${this.state.minmagnitude}`;
-    // let url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2021-01-27&endtime=2021-01-28&minmagnitude=4.9&minmagnitude=4.9&latitude=37&longitude=100&maxradiuskm=200`
-    fetch(url, {
-      starttime: Number(this.state.starttime),
-      endtime: Number(this.state.endtime),
-      minmagnitude: Number(this.state.minmagnitude),
-    })
-      .then((response) => response.json())
-      .then((contents) => {
-        this.setState(
-          {
-            data: [...this.state.data, ...contents.features],
-            // data2: [...this.state.data2, ...contents],
-          },
-          console.log(contents)
-        );
+
+    if(this.state.starttime && this.state.endtime){
+      let url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${this.state.starttime}&endtime=${this.state.endtime}&minmagnitude=${this.state.minmagnitude || 0 }&minmagnitude=${this.state.minmagnitude || 0}`;
+      fetch(url, {
+        starttime: Number(this.state.starttime),
+        endtime: Number(this.state.endtime),
+        minmagnitude: Number(this.state.minmagnitude),
       })
-      .catch(() =>
-        console.log("Can’t access " + url + " response. Blocked by browser?")
-      );
+        .then((response) => response.json())
+        .then((contents) => {
+          this.setState(
+            {
+              data: [...this.state.data, ...contents.features],
+            }
+          );
+        })
+        .catch(() =>
+          console.log("Can’t access " + url + " response. Blocked by browser?")
+        );
+    } else {
+      alert('Must enter dates')
+    }
   };
 
   locationHandler = (event) => {
@@ -74,10 +70,10 @@ class Form extends Component {
           <div md="6">
             <form onSubmit={this.submitHandler}>
               <br />
-              <p className="h4 text-center mb-4">POST</p>
+              <p className="h4 text-center mb-4">Earthquake</p>
               <br />
               <label htmlFor="defaultFormLoginPasswordEx" className="grey-text">
-                start time
+                Start Date
               </label>
               <input
                 type="text"
@@ -90,7 +86,7 @@ class Form extends Component {
               <br />
               <br />
               <label htmlFor="defaultFormLoginPasswordEx" className="grey-text">
-                end time
+                End Date
               </label>
               <input
                 type="text"
@@ -101,11 +97,9 @@ class Form extends Component {
                 onChange={this.endtimeHandler}
               />
               <br />
-              Location:
-              <br />
               <br />
               <label htmlFor="defaultFormLoginEmailEx" className="grey-text">
-                minmagnitude
+                Minmagnitude
               </label>
               <input
                 style={{ background: "#e6f2ff" }}
@@ -119,7 +113,7 @@ class Form extends Component {
               <br />
               <div className="text-center mt-4">
                 <MDBBtn color="indigo" type="submit">
-                  Submit
+                  SEARCH
                 </MDBBtn>
               </div>
             </form>
@@ -149,40 +143,3 @@ class Form extends Component {
 }
 
 export default Form;
-
-
-  // maxradiuskmHandler = (event) => {
-  //   this.setState({ maxradiuskm: event.target.value });
-  // };
-
-  // latitudeHandler = (event) => {
-  //   this.setState({ latitude: event.target.value });
-  // };
-  // longitudeHandler = (event) => {
-  //   this.setState({ longitude: event.target.value });
-  // };
-
-// <label htmlFor="defaultFormLoginEmailEx" className="grey-text">
-//                 latitude
-//               </label>
-//               <input
-//                 style={{ background: "#e6f2ff" }}
-//                 className="form-control"
-//                 type="text"
-//                 value={this.state.latitude}
-//                 onChange={this.latitudeHandler}
-//               />
-//               <br />
-//               <br />
-//               <label htmlFor="defaultFormLoginEmailEx" className="grey-text">
-//                 longitude
-//               </label>
-//               <input
-//                 style={{ background: "#e6f2ff" }}
-//                 className="form-control"
-//                 type="text"
-//                 value={this.state.longitude}
-//                 onChange={this.longitudeHandler}
-//               />
-//               <br />
-//               <br />
