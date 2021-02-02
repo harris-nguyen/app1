@@ -3,12 +3,13 @@ import Tabledata from './TableResults'
 
 class Results extends Component {
   render(){
-    const data = this.props.data.map((data, index) => {
+    const data = this.props.data.map((data, i) => {
       return (
         <Tabledata
           place={data.properties.place}
           mag={data.properties.mag}
           time={data.properties.time}
+          index={i}
         />
       );
     });
