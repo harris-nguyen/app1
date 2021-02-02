@@ -9,7 +9,7 @@ class Results extends Component {
           place={data.properties.place}
           mag={data.properties.mag}
           time={data.properties.time}
-          index={i}
+          key={i}
         />
       );
     });
