@@ -1,0 +1,18 @@
+import React, { Component } from "react";
+
+class TableResults extends Component {
+  render() {
+    const milliseconds = this.props.time;
+    const dateObject = new Date(milliseconds);
+    const humanDateFormat = dateObject.toLocaleString();
+    return (
+      <tr key={this.props.index}>
+        <td>{this.props.place}</td>
+        <td>{this.props.mag}</td>
+        <td>{humanDateFormat}</td>
+      </tr>
+    );
+  }
+}
+
+export default TableResults;
