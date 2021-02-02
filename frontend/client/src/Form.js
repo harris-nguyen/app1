@@ -18,7 +18,7 @@ class Form extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-
+    // input error handling here
     if(this.state.starttime && this.state.endtime){
       let minMag = this.state.minmagnitude || 0;
       let url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${this.state.starttime}&endtime=${this.state.endtime}&minmagnitude=${minMag}&minmagnitude=${minMag}`;
