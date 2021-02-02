@@ -2,9 +2,11 @@ import React, { Component } from "react";
 
 class Chart extends Component {
   render() {
+
     let max = 0;
     let min
     let magData = this.props.magCollection;
+
     for (let i = 0; i < magData.length; i++) {
       if(magData[i] > max){
         max = magData[i];
@@ -13,6 +15,7 @@ class Chart extends Component {
         min = magData[i]
       }
     }
+
     return (
       <div className="container">
         <div>Total earthquakes: {this.props.len}</div>
