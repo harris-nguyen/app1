@@ -6,7 +6,7 @@ class Chart extends Component {
     let max = 0;
     let min
     let magData = this.props.magCollection;
-
+    // check max and min
     for (let i = 0; i < magData.length; i++) {
       if(magData[i] > max){
         max = magData[i];

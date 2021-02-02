@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 class TableResults extends Component {
   render() {
+    // convert milliseconds
     const milliseconds = this.props.time;
     const dateObject = new Date(milliseconds);
     const humanDateFormat = dateObject.toLocaleString();
