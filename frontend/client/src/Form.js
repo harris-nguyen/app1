@@ -109,12 +109,11 @@ class Form extends Component {
               <br />
               <br />
               <div className="text-center mt-4">
-                {this.state.data.length === 0
-                  ? <MDBBtn color="indigo" type="submit">
-                      SEARCH
-                    </MDBBtn>
-                  : null
-                }
+                {this.state.data.length === 0 ? (
+                  <MDBBtn color="indigo" type="submit">
+                    SEARCH
+                  </MDBBtn>
+                ) : null}
               </div>
             </form>
           </div>
@@ -126,13 +125,7 @@ class Form extends Component {
           <div>
             {this.state.data.length !== 0 ? (
               <div>
-                {this.state.data.map((info, i) => {
-                  return (
-                    <div key={i}>
-                      <Results data={info.properties} />
-                    </div>
-                  );
-                })}
+                <Results data={this.state.data} />
               </div>
             ) : null}
           </div>
@@ -143,3 +136,18 @@ class Form extends Component {
 }
 
 export default Form;
+
+
+// {
+//   this.state.data.length !== 0 ? (
+//     <div>
+//       {this.state.data.map((info, i) => {
+//         return (
+//           <div key={i}>
+//             <Results data={info.properties} index={i} />
+//           </div>
+//         );
+//       })}
+//     </div>
+//   ) : null;
+// }

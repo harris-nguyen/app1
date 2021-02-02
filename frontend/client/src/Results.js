@@ -1,29 +1,29 @@
 import React, { Component } from "react";
+import Tabledata from './TableResults'
 
 class Results extends Component {
   render(){
-    const milliseconds = this.props.data.time;
-    const dateObject = new Date(milliseconds);
-    const humanDateFormat = dateObject.toLocaleString();
+    const data = this.props.data.map((data, index) => {
+      return (
+        <Tabledata
+          place={data.properties.place}
+          mag={data.properties.mag}
+          time={data.properties.time}
+        />
+      );
+    });
 
     return (
       <div className="container">
-        <table className="table table-striped table-dark">
+        <table className="table table-dark">
           <thead>
             <tr>
-              <th scope="col">{this.props.data.place}</th>
+              <th scope="col">LOCATION</th>
+              <th scope="col">MAG</th>
+              <th scope="col">TIME</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div>
-                  <span> | Magnitude: {this.props.data.mag}</span>
-                  <span> | Time: {humanDateFormat} |</span>
-                </div>
-              </td>
-            </tr>
-          </tbody>
+          <tbody>{data}</tbody>
         </table>
       </div>
     );
@@ -31,3 +31,24 @@ class Results extends Component {
 }
 
 export default Results;
+
+
+//  <table className="table table-striped table-dark">
+//    <thead>
+//      <tr>
+//        <th scope="col"></th>
+//      </tr>
+//    </thead>
+//    <tbody>
+//      <tr>
+//        <td>
+//          <div>
+//            <span> | {this.props.index + 1}</span>
+//            <span> | LOCATION: {this.props.data.place}</span>
+//            <span> | MAGNITUDE: {this.props.data.mag}</span>
+//            <span> | TIME: {humanDateFormat} |</span>
+//          </div>
+//        </td>
+//      </tr>
+//    </tbody>
+//  </table>;
