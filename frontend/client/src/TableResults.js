@@ -6,7 +6,7 @@ class TableResults extends Component {
     const dateObject = new Date(milliseconds);
     const humanDateFormat = dateObject.toLocaleString();
     return (
-      <tr key={this.props.index}>
+      <tr>
         <td>{this.props.place}</td>
         <td>{this.props.mag}</td>
         <td>{humanDateFormat}</td>
